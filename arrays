@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    const int numCandidates = 5;
+    int voteCount[numCandidates] = {0}; 
+    int spoiltBallots = 0;
+    int vote;
+
+    cout << "School Election Voting System" << endl;
+    cout << "Vote for your candidate (1-5), or enter 0 to stop voting." << endl;
+
+    while (true) {
+        cout << "Enter your vote: ";
+        cin >> vote;
+
+        if (cin.fail()) {
+            cin.clear(); 
+            cin.ignore(1000, '\n');  
+            cout << "Invalid input! Please enter a number between 0 and 5.\n";
+            continue;
+        }
+
+        if (vote == 0) {
+            break; 
+        } else if (vote >= 1 && vote <= numCandidates) {
+            voteCount[vote - 1]++;
+        } else {
+            spoiltBallots++; 
+        }
+    }
+
+    cout << "\nElection Results:\n";
+    for (int i = 0; i < numCandidates; i++) {
+        cout << "Candidate " << (i + 1) << " received " << voteCount[i] << " votes." << endl;
+    }
+    cout << "Total spoilt ballots: " << spoiltBallots << endl;
+
+    return 0;
+}
